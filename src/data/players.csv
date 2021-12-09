@@ -1,0 +1,20 @@
+number,name,town,position,d1,d2,d3
+00,Guy Germaine,"St. Paul, MN",F,true,true,true
+1,Terry Hall,"Minneapolis, MN",F,true,false,false
+2,Tommy Duncan,"Minneapolis, MN",D,true,false,false
+4,Lester Averman,"Brooklyn Park, MN",F,true,true,true
+5,Tammy Duncan,"Minneapolis, MN",F,true,false,false
+6,Julie Gaffney,"Bangor, ME",G,false,true,true
+7,Dwayne Robertson,"Austin, TX",F,false,true,true
+9,Jesse Hall,"Minneapolis, MN",F,true,true,false
+11,Dave Karp,"Minneapolis, MN",D,true,false,false
+16,Ken Wu,"San Francisco, CA",F,false,true,true
+18,Connie Moreau,"Minneapolis, MN",F,true,true,true
+21,Dean Portman,"Chicago, IL",D,false,true,true
+22,Luis Mendoza,"Miami, FL",F,false,true,true
+24,Peter Mark,"Minneapolis, MN",D,true,false,false
+33,Greg Goldberg,"Philadelphia, PA",G/D,true,true,true
+44,Fulton Reed,"Stillwater, MN",D/F,true,true,true
+56,Russ Tyler,"Los Angeles, CA",D,false,true,true
+96,"Charlie Conway","Minneapolis, MN",F,true,true,true
+99,Adam Banks,"Edina, MN",F,true,true,true

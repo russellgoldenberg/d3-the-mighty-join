@@ -1,0 +1,45 @@
+@import "variables.css";
+@import "normalize.css";
+@import "font.css";
+@import "reset.css";
+
+/* colors defined in variables.css */
+:root {
+	/* font */
+	--sans: Helvetica, Arial, sans-serif;
+	--display: "Jersey M54", Helvetica, "Courier New", monspace;
+	--mono: Menlo, Consolas, Monaco, "Courier New", monospace;
+	
+	/* z-index */
+	--z-bottom: -100;
+  --z-middle: 0;
+  --z-top: 100;
+	--z-overlay: 1000;
+
+	/* presets */
+	--border-radius: 4px;
+	--font-body: var(--sans);
+	--font-form: var(--sans);
+	--color-bg: var(--color-green);
+	--color-fg: var(--color-yellow);
+	--color-placeholder: var(--color-gray-dark);
+  --color-link: var(--color-green);
+  --color-focus: var(--color-green);
+  --color-form-bg: var(--color-gray-dark);
+	--color-form-fg: var(--color-off-black);
+	--color-border: var(--color-gray-light);
+	--color-selection: var(--color-gray-light);
+  --color-highlight: var(--color-yellow);
+	
+}
+
+
+h1, h2, h3, h4, span {
+	background: var(--color-bg);
+	font-family: var(--display);
+	text-shadow: 
+	-2px -2px 2px var(--color-blue),
+	-2px 2px 2px var(--color-blue),
+	2px 2px 2px var(--color-blue),
+	2px -2px 2px var(--color-blue);
+}
