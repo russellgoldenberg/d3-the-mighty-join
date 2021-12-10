@@ -1,8 +1,17 @@
 <script>
+  import {
+    easeCubicInOut,
+    forceSimulation,
+    forceX,
+    forceY,
+    forceCollide,
+    select,
+    selectAll
+  } from "d3";
   import { base } from "$app/paths";
-  import { forceSimulation, forceX, forceY, forceCollide, select, selectAll } from "d3";
-  import { onMount } from "svelte";
   import { browser } from "$app/env";
+  import { onMount, tick } from "svelte";
+  import viewport from "$stores/viewport.js";
 
   export let data;
 
@@ -14,15 +23,16 @@
   let nodes;
   let players;
 
+  $: radius = Math.floor(Math.min(width, height) * 0.08);
   $: centerX = width / 2;
   $: centerY = height / 2;
-  $: radius = Math.floor(Math.min(width, height) * 0.08);
+  $: $viewport.width, runSim();
 
   const getImage = (d) => {
     return `url("${path}/${d.name.replace(" ", "_")}.jpg")`;
   };
 
-  const tick = () => {
+  const ticked = () => {
     players
       .style("width", `${radius * 2}px`)
       .style("height", `${radius * 2}px`)
@@ -30,10 +40,10 @@
       .style("left", (d) => `${d.x - radius}px`);
   };
 
-  const sim = forceSimulation().on("tick", tick).stop();
+  const sim = forceSimulation().on("tick", ticked).stop();
 
   const runSim = () => {
-    if (!data.length) return;
+    if (!browser || !data.length) return;
     data.forEach((d) => {
       if (!d.x) {
         d.x = centerX;
@@ -53,7 +63,8 @@
           p.append("div").attr("class", "layer");
           p.append("p").text((d) => d.name);
           p.transition()
-            .duration(1000)
+            .duration(500)
+            .ease(easeCubicInOut)
             .delay(1000)
             .style("opacity", 1)
             .style("transform", "scale(1)");
@@ -67,8 +78,9 @@
           exit
             .transition()
             .duration(1000)
+            .ease(easeCubicInOut)
             .style("opacity", 0)
-            .style("transform", "scale(1)")
+            .style("transform", "scale(0)")
             .remove()
       );
 
@@ -89,6 +101,11 @@
   };
 
   $: if (browser) runSim(data);
+
+  onMount(async () => {
+    await tick();
+    runSim();
+  });
 </script>
 
 {#if browser}
@@ -104,8 +121,9 @@
 <style>
   .chart {
     width: 90%;
-    margin: 4rem auto;
-    height: 90vh;
+    margin: 0 auto;
+    height: 100vh;
+    max-height: 640px;
     position: relative;
   }
 
@@ -162,5 +180,11 @@
 
   :global(.player.new) {
     box-shadow: 0 0 0.5vw 0.5vw var(--color-yellow);
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .chart {
+      max-height: 100%;
+    }
   }
 </style>

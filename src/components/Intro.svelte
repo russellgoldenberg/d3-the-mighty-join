@@ -6,12 +6,13 @@
     <span>Join</span>
   </h1>
 
-  <p>A data visualization joke that probably doesn't resonate with many. Scroll.</p>
+  <p>The intersection of 90s nostalgia and data visualization. Scroll.</p>
 </section>
 
 <style>
   section {
-    margin-bottom: 4em;
+    max-width: 30em;
+    margin: 4em auto;
   }
 
   h1 {
@@ -21,12 +22,6 @@
     max-width: 5em;
     line-height: 1;
     margin: 4rem auto;
-  }
-
-  p {
-    font-size: clamp(18px, 3vw, 24px);
-    max-width: 13em;
-    margin: 0 auto;
   }
 
   span {

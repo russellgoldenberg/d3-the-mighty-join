@@ -13,7 +13,10 @@
   }));
 
   let value = 0;
-  $: current = `d${value + 1}`;
+  let toggleValue = "d1";
+
+  $: current = toggleValue;
+  $: if (!isNaN(value)) current = `d${value + 1}`;
 
   $: filtered = data.filter((d) => d[current]);
 
@@ -21,7 +24,7 @@
     {
       title: "D1: The Mighty Ducks",
       description:
-        "Just a couple of kids from Minnesota who literally couldn't skate but ended up winning the league."
+        "Just a couple of kids from Minnesota, who literally couldn't skate but ended up winning the league."
     },
     {
       title: "D2: The Mighty Ducks",
@@ -31,7 +34,7 @@
     {
       title: "D3: The Mighty Ducks",
       description:
-        "Just a couple of kids from Minnesota, plus the best kids in the country, who together won gold at the Junior Goodwill Games, and now struggle to beat a slightly older prep school team. But they lost Jesse."
+        "Just a couple of kids from Minnesota, plus the best kids in the country, who together won gold at the Junior Goodwill Games, and now struggle to beat a slightly older prep school team."
     }
   ];
 </script>
@@ -41,15 +44,24 @@
 <section>
   <article>
     <Intro />
-    <Scrolly bind:value>
-      {#each movies as { title, description }, i}
-        <div class:active={value === i}>
-          <h2>{title}</h2>
-          <p>{description}</p>
-        </div>
-      {/each}
-    </Scrolly>
-    <div>By Russell.</div>
+
+    <div class="toggle">
+      <ButtonSet
+        bind:value={toggleValue}
+        options={[{ value: "d1" }, { value: "d2" }, { value: "d3" }]}
+      />
+    </div>
+
+    <div class="scrolly">
+      <Scrolly bind:value>
+        {#each movies as { title, description }, i}
+          <div class="text" class:active={value === i}>
+            <h2>{title}</h2>
+            <p>{description}</p>
+          </div>
+        {/each}
+      </Scrolly>
+    </div>
   </article>
   <figure>
     <Chart data={filtered} />
@@ -58,19 +70,20 @@
 
 <style>
   section {
-    display: flex;
+    /* display: flex; */
   }
 
   article {
-    width: 30em;
+    width: 90%;
+    max-width: 640px;
+    padding: 0 2em;
+    margin: 0 auto;
   }
 
-  div {
+  .text {
     height: 75vh;
     opacity: 0.5;
-    font-size: clamp(18px, 3vw, 24px);
     margin: 0 auto;
-    padding: 1em;
   }
 
   h2 {
@@ -81,11 +94,39 @@
     opacity: 1;
   }
 
-  figure {
-    position: sticky;
-    width: 100%;
-    flex: 1;
-    height: 100vh;
-    top: 0;
+  .toggle {
+    text-align: center;
+    font-family: var(--display);
+    margin: 1em auto;
+  }
+
+  .scrolly {
+    display: none;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    section {
+      display: flex;
+    }
+
+    article {
+      width: 30em;
+    }
+
+    figure {
+      position: sticky;
+      width: 100%;
+      flex: 1;
+      height: 100vh;
+      top: 0;
+    }
+
+    .toggle {
+      display: none;
+    }
+
+    .scrolly {
+      display: block;
+    }
   }
 </style>

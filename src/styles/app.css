@@ -34,7 +34,7 @@
 }
 
 
-h1, h2, h3, h4, span {
+h1, h2, h3, h4 {
 	background: var(--color-bg);
 	font-family: var(--display);
 	text-shadow: 
@@ -42,4 +42,8 @@ h1, h2, h3, h4, span {
 	-2px 2px 2px var(--color-blue),
 	2px 2px 2px var(--color-blue),
 	2px -2px 2px var(--color-blue);
+}
+
+p {
+	font-size: clamp(18px, 2vw, 24px);
 }
